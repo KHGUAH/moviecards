@@ -1,3 +1,7 @@
+name: CI 
+
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,4 +22,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: moviecards-java
-          path: "${{ github.workspace }}/target/*.jar"
+          path: "${{ github.workspace }}/target/*.jar"0
