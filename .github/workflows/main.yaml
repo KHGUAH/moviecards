@@ -1,29 +1,31 @@
-name: CI  
-on: push  
+name: CI 
+
+on: push
+
 jobs:
-   build:     
+  build:     
     runs-on: ubuntu-latest
     steps:
       - name: empaquetado
         run: echo "empaquetado"  
 
-test:
-     needs: build
-     runs-on: ubuntu-latest
-     steps:       
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:       
       - name: pruebas         
         run: echo "pruebas" 
 
-qa:
-     needs: test     
-     runs-on: ubuntu-latest     
-     steps:       
-      - name: calidad         
-        run: echo "calidad" 
+  qa:
+    needs: test     
+    runs-on: ubuntu-latest     
+    steps:       
+     - name: calidad         
+       run: echo "calidad" 
 
-deploy:
-     needs: qa     
-     runs-on: ubuntu-latest     
-     steps:       
-      - name: despliegue 
-        run: echo "despliegue"
+  deploy:
+    needs: qa     
+    runs-on: ubuntu-latest     
+    steps:       
+     - name: despliegue 
+       run: echo "despliegue"
