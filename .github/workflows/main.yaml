@@ -37,33 +37,21 @@ jobs:
           java-version: "11"
           distribution: "adopt"
 
-      - name: Instalar Chrome y ChromeDriver para pruebas end to end
-        run: |
-          wget https://dl.google.com/linux/direct/google-chromestable_current_amd64.deb
-
-          sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-          sudo apt --fix-broken install -y
-
-          CHROMEDRIVER_VERSION=$(curl -sS
-          https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-
-          curl -L -o chromedriver.zip
-          https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chr
-          omedriver_linux64.zip
-
-          unzip chromedriver.zip
+      - name: Instalar Chrome y ChromeDriver
+        uses: browser-actions/setup-chrome@v2
+        with:
+         
+          chrome-version: 'latest'
           
-          chmod +x chromedriver
+          install-chromedriver: true
           
-          sudo mv chromedriver /usr/local/bin/
+          install-dependencies: true
       
       - name: Ejecutar la aplicación para pruebas end to end
         run: mvn spring-boot:run & sleep 60
 
       - name: Ejecutar las pruebas unitarias, de integración y end to end
         run: mvn clean verify
-
   qa:
     needs: test     
     runs-on: ubuntu-latest     
