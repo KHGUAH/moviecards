@@ -77,21 +77,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: qa
     if: github.ref=='refs/heads/master'
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+      
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: moviecards-java
-
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'moviecards-hilera'
+          app-name: 'moviecards-hernandez'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_662FBA3A06434B488CFB92F1A5AD0CB0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_662FBA3A06434B488CFB92F1A5AD0CB0 }}
