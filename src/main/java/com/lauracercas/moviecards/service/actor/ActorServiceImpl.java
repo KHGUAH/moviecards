@@ -1,6 +1,6 @@
 package com.lauracercas.moviecards.service.actor;
 
-// import java.util.Arrays;
+import java.util.Arrays;
 import com.lauracercas.moviecards.model.Actor;
 import com.lauracercas.moviecards.repositories.ActorJPA;
 
