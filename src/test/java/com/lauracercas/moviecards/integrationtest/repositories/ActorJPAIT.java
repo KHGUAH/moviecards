@@ -27,11 +27,14 @@ public class ActorJPAIT {
         Actor actor = new Actor();
         actor.setName("actor");
         actor.setBirthDate(new Date());
+        actor.setDeadDate(new Date());
         actor.setCountry("spain");
 
         Actor savedActor = actorJPA.save(actor);
 
         assertNotNull(savedActor.getId());
+
+        assertEquals(actor.getDeadDate(), savedActor.getDeadDate());
 
         Optional<Actor> foundActor = actorJPA.findById(savedActor.getId());
 
@@ -44,11 +47,13 @@ public class ActorJPAIT {
         Actor actor = new Actor();
         actor.setName("actor");
         actor.setBirthDate(new Date());
+        actor.setDeadDate(new Date());
         Actor savedActor = actorJPA.save(actor);
 
         Optional<Actor> foundActor = actorJPA.findById(savedActor.getId());
 
         assertTrue(foundActor.isPresent());
         assertEquals(savedActor, foundActor.get());
+        assertEquals(savedActor.getDeadDate(), foundActor.get().getDeadDate());
     }
 }

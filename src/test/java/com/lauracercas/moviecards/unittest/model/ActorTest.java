@@ -16,12 +16,19 @@ public class ActorTest {
     Actor actor = new Actor();
 
     @Test
+    void testSetGetDeadDate() {
+        Date deadDateExample = new Date();
+        actor.setDeadDate(deadDateExample);
+        assertEquals(deadDateExample, actor.getDeadDate());
+    }
+
+    @Test
     void testSetGetId() {
         Integer idExample = 1;
         actor.setId(idExample);
         assertEquals(idExample, actor.getId());
     }
-
+    
     @Test
     void testSetGetName() {
         String nameExample = "Sample name";
