@@ -72,7 +72,22 @@ jobs:
       - name: Revisar la calidad con Sonarqube
         run: |
           mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.qualitygate.wait=true -Dsonar.login=admin -Dsonar.password=admin
-
+  stage:
+    needs: qa
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar artefacto del build
+        uses: actions/download-artifact@v4
+        with:
+          name: moviecards-java
+      - name: Deploy to Azure Web App (Pre-Producción)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'moviecards-pre-hernandez'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25AE17465ABC44659AA714B720622419 }}
+          package: '*.jar'
+  
+  
   deploy:
     runs-on: ubuntu-latest
     needs: qa
